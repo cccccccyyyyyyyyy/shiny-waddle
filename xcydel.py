@@ -23,6 +23,12 @@ for image_name in os.listdir(images_dir):
         image_name = image_name + '.jpg'
         # print(image_name)
         os.remove(os.path.join(images_dir,image_name))
+for xml in os.listdir(xml_dir):
+    xml = xml.split('.')[0]
+    if xml not in imgs:
+        xml = xml +'.xml'
+        os.remove(os.path.join(xml_dir,xml))
+
 
  
  
