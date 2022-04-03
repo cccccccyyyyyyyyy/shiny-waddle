@@ -1,8 +1,10 @@
 #! /usr/bin/python
 # -*- coding:UTF-8 -*-
 import os
+import cv2
 txt_dir = 'txt_out'
 images_dir = 'VOCdevkit\VOC2007\JPEGImages'
+afimages_dir = 'VOCdevkit/VOC2007/'
 txts = []
 imgs = []
 for txt in os.listdir(txt_dir):
@@ -14,7 +16,23 @@ for image_name in os.listdir(images_dir):
     image_name = image_name.split('.')[0]
     if image_name not in txts:
         image_name = image_name + '.jpg'
+        pic_file_name = os.path.splitext(image_name)[0] + ".jpg"
+        pic_file_path = os.path.join(images_dir,pic_file_name)
+        image = cv2.imread(pic_file_path)
         # print(image_name)
+        # os.remove(os.path.join(images_dir,image_name))
+        cv2.imwrite(afimages_dir + pic_file_name, image)
+
+for image_name in os.listdir(images_dir):
+    imgs.append(os.path.splitext(image_name)[0])
+    imgs.append(image_name.split('.')[0])
+    image_name = image_name.split('.')[0]
+    if image_name not in txts:
+        image_name = image_name + '.jpg'
+        pic_file_name = os.path.splitext(image_name)[0] + ".jpg"
+        pic_file_path = os.path.join(images_dir,pic_file_name)
+        # image = cv2.imread(pic_file_path)
+        print(image_name)
         os.remove(os.path.join(images_dir,image_name))
         
 from operator import length_hint
